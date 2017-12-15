@@ -1,8 +1,10 @@
-#pragma once
 #ifndef PRIJAVANASISTEM_H
 #define PRIJAVANASISTEM_H
 #include <stdio.h>
 #include <stdlib.h>
+#define _ERROR_VALUE "Nije moguce otvoriti fajl."
+
+int brojKorisnika;
 
 typedef struct _korisnik
 {
@@ -13,11 +15,9 @@ typedef struct _korisnik
 	char korisnicka_grupa[14];
 }KORISNIK;
 
-
 KORISNIK* citanjeIzDatoteke(FILE*);
 KORISNIK provjeraKorisnika(char*, char*, KORISNIK*);
 int prijavaNaSistem(char**, char**, KORISNIK*);
 int provjeraPINa(char*);
-
 
 #endif
