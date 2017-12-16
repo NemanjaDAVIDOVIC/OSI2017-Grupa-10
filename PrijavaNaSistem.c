@@ -6,7 +6,7 @@ U ulaznoj datoteci podaci su redom upisani kao:
 Svaka rijec je u novom redu!
 */
 
-KORISNIK* citanjeIzatoteke(FILE* file)
+KORISNIK* citanjeIzDatoteke(FILE* file)
 {
 	KORISNIK* arr;
 	if (file = fopen("source.txt", "r"))
@@ -25,6 +25,7 @@ KORISNIK* citanjeIzatoteke(FILE* file)
 			fscanf(file, "%s", arr[i].PIN);
 			fscanf(file, "%s", arr[i].korisnicka_grupa);
 		}
+		fclose(file);
 		return arr;
 	}
 	else

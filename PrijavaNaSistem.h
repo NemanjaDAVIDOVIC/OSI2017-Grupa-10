@@ -16,8 +16,8 @@ typedef struct _korisnik
 }KORISNIK;
 
 KORISNIK* citanjeIzDatoteke(FILE*);
-KORISNIK provjeraKorisnika(char*, char*, KORISNIK*);
-int prijavaNaSistem(char**, char**, KORISNIK*);
-int provjeraPINa(char*);
+//KORISNIK provjeraKorisnika(char*, char*, KORISNIK*);
+//int prijavaNaSistem(char**, char**, KORISNIK*);
+//int provjeraPINa(char*);
 
 #endif
