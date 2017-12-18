@@ -26,11 +26,9 @@ void citanjeIzDatoteke(KORISNIK** arr)
 			fscanf(file, "%s", (*arr)[i].korisnicka_grupa);
 		}
 		fclose(file);
-		return arr;
 	}
 	else
 		printf("%s\n", _ERROR_VALUE);
-	return NULL;
 }
 
 

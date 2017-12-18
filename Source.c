@@ -4,7 +4,7 @@ int main()
 {
 	KORISNIK *korisnik = NULL;
 	citanjeIzDatoteke(&korisnik);
-	for (int i = 0; i < brojKorisnika; i++)
+	for (int i = 0; i < brojKorisnika && korisnik != NULL; i++)
 	{
 		printf("%s\n", korisnik[i].ime);
 		printf("%s\n", korisnik[i].prezime);
