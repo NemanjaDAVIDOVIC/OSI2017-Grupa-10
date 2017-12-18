@@ -2,6 +2,8 @@
 #define PRIJAVANASISTEM_H
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
 #define _ERROR_VALUE "Nije moguce otvoriti fajl."
 
 int brojKorisnika;
@@ -15,9 +17,9 @@ typedef struct _korisnik
 	char korisnicka_grupa[14];
 }KORISNIK;
 
-KORISNIK* citanjeIzDatoteke(FILE*);
-//KORISNIK provjeraKorisnika(char*, char*, KORISNIK*);
-//int prijavaNaSistem(char**, char**, KORISNIK*);
-//int provjeraPINa(char*);
+void citanjeIzDatoteke(KORISNIK**);
+int provjeraKorisnika(char*, char*, KORISNIK*, KORISNIK*);
+int prijavaNaSistem(KORISNIK*, KORISNIK*);
+int provjeraPINa(char*);
 
 #endif

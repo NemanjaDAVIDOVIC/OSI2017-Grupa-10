@@ -2,8 +2,8 @@
 
 int main()
 {
-	FILE *file;
-	KORISNIK *korisnik = citanjeIzDatoteke(&file);
+	KORISNIK *korisnik = NULL;
+	citanjeIzDatoteke(&korisnik);
 	for (int i = 0; i < brojKorisnika; i++)
 	{
 		printf("%s\n", korisnik[i].ime);
@@ -12,6 +12,15 @@ int main()
 		printf("%s\n", korisnik[i].PIN);
 		printf("%s\n", korisnik[i].korisnicka_grupa);
 	}
+
+	KORISNIK trenutni_k;
+	if (prijavaNaSistem(korisnik, &trenutni_k))
+		printf("Uspjesno logovanje!");
+	else
+		printf(" Neuspjesno logovanje!");
+
+	getchar();
 	getchar();
 
+	free(korisnik);
 }
