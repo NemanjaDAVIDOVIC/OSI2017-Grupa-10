@@ -13,7 +13,7 @@ void citanjeIzDatoteke(KORISNIK** arr)
 	{
 		char line[21];
 		while (fgets(line, sizeof(line), file)) //Broji koliko ima linija u fajlu
-			brojKorisnika++; // TESTER: prijaviti gresku ukoliko se u fajlu ne nalaze potpuni podaci
+			brojKorisnika++;
 		brojKorisnika /= 5; //Broj linija u fajlu podijeljen sa 5 je broj korisnika
 		*arr = (KORISNIK*)malloc((brojKorisnika) * sizeof(KORISNIK));
 		rewind(file);
