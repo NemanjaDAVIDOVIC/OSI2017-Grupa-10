@@ -17,9 +17,9 @@ typedef struct _korisnik
 	char korisnicka_grupa[14];
 }KORISNIK;
 
-void citanjeIzDatoteke(KORISNIK**);
-int provjeraKorisnika(char*, char*, KORISNIK*, KORISNIK*);
-int prijavaNaSistem(KORISNIK*, KORISNIK*);
-int provjeraPINa(char*);
+void citanjeIzDatoteke(KORISNIK**); // TESTER: Testirano.
+int provjeraKorisnika(char*, char*, KORISNIK*, KORISNIK*); // TESTER: Testirano.
+int prijavaNaSistem(KORISNIK*, KORISNIK*); // TESTER: Testirano.
+int provjeraPINa(char*); // TESTER: Testirano.
 
 #endif
