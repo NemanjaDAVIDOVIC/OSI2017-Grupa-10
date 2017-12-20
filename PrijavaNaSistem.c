@@ -13,7 +13,11 @@ void citanjeIzDatoteke(KORISNIK** arr)
 	{
 		char line[21];
 		while (fgets(line, sizeof(line), file)) //Broji koliko ima linija u fajlu
-			brojKorisnika++;
+			brojKorisnika++; 
+
+		/* TESTER: Pozeljna bi bila provjera da li je baza podatak potpuna
+		(da li negdje fali neki podatak => da li je broj korisnika cijeli broj). */
+
 		brojKorisnika /= 5; //Broj linija u fajlu podijeljen sa 5 je broj korisnika
 		*arr = (KORISNIK*)malloc((brojKorisnika) * sizeof(KORISNIK));
 		rewind(file);
@@ -57,6 +61,10 @@ int prijavaNaSistem(KORISNIK* arr, KORISNIK* ret)  //Pomocu 'KORISNIK* ret' se v
 		return 0;
 	}
 	return provjeraKorisnika(k_ime, pin, arr, ret);
+
+	/* TESTER: Dobro rjesenje. 
+	Predlozio bih da se, ukoliko nema unesenog korisnickog imena u bazi podataka,
+	ne nudi opcija unosa PIN-a, vec da odmah izbacuje gresku. */
 }
 
 
