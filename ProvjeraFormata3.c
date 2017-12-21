@@ -6,11 +6,14 @@ char* provjeraFormata3()
 {
 	FILE* file;
 	int br = 0;
-	if (file = fopen("UcitaniRacun.txt", "r"))
+	if (file = fopen("UcitaniRacun.txt", "r")) // TESTER: Otvaranje datoteke
 	{
 		char str[36];
+		/* TESTER: Preskakanje naziva. */
 		fgets(str, 35, file);
 		fgets(str, 13, file);
+
+		/* TESTER: Provjera stavki racuna. */
 		if (!strcmp(str, "Poslovnica: "))
 			br++;
 		fgets(str, 27, file);
@@ -35,6 +38,7 @@ char* provjeraFormata3()
 		fgets(str, 36, file);
 		if (!strcmp(str, "----------------------------------\n"))
 			br++;
+		/* TESTER: Preskakanje konkretnih stavki racuna. */
 		do
 		{
 			fgets(str, 37, file);
