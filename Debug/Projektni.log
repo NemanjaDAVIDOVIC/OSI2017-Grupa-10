@@ -1,6 +1,0 @@
-﻿  Source.c
-c:\users\rb computer\desktop\projektni\projektni\source.c(6): warning C4047: 'function': 'FILE *' differs in levels of indirection from 'FILE **'
-c:\users\rb computer\desktop\projektni\projektni\source.c(6): warning C4024: 'citanjeIzDatoteke': different types for formal and actual parameter 1
-  PrijavaNaSistem.c
-  Generating Code...
-  Projektni.vcxproj -> C:\Users\RB Computer\Desktop\Projektni\Debug\Projektni.exe
