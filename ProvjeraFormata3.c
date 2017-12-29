@@ -2,11 +2,11 @@
 #include <string.h>
 #pragma warning(disable: 4996)
 
-char* provjeraFormata3()
+char* provjeraFormata3(char* fileName)
 {
 	FILE* file;
 	int br = 0;
-	if (file = fopen("UcitaniRacun.txt", "r")) // TESTER: Otvaranje datoteke
+	if (file = fopen(fileName, "r")) // TESTER: Otvaranje datoteke
 	{
 		char str[36];
 		/* TESTER: Preskakanje naziva. */

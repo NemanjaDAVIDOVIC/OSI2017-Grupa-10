@@ -7,7 +7,7 @@
 #define ERROR "Ucitani racun nije ispravan."
 #define NOT_OPENED "Ne moze se otvoriti datoteka za citanje."
 
-char* provjeraFormata3(); // TESTER: Istestirano.
+char* provjeraFormata3(char*); // TESTER: Istestirano.
 
 #endif
 
