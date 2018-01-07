@@ -1,6 +1,6 @@
 #include "ProvjeraFormata5.h"
 
-int checkFile(FILE* fp, char* path)
+int provjeraPetogFormata(FILE* fp, char* path)
 {
 	char original[30] = { "Sifra,Kolicina,Cijena,Ukupno\n" };
 	char buffer[100];

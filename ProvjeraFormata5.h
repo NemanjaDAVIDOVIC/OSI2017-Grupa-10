@@ -9,4 +9,4 @@
 int checkLine(char*, int*, int*);
 
 //Pomocne
-int checkFile(FILE*,char*);
+int provjeraPetogFormata(FILE*,char*);
