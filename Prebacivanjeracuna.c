@@ -16,15 +16,24 @@ int moveBadFile(char* path)
 			fprintf(fp, "%s", file);						//Upisuje originalni racun u novi folder
 			fclose(fp);
 			free(file);
-			if (!remove(path))						//Brise originalni racun
+			if (!remove(path)) {
+				printf("Racun uspjesno obrisan.\n"); //Brise originalni racun
 				return 1;
+			}
+			printf("Racun nije bil moguce obrisati.\n");
 			return -1;
 		}
-		else
+		else 
+		{
+			printf("Nije moguce prebaciti neodgovarajuci racun.\n");
 			return 0;
+		}
 	}
 	else
+	{
+		printf("Nije moguce procitati racun.\n");
 		return 2;
+	}
 }
 
 

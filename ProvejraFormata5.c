@@ -10,6 +10,7 @@ int provjeraPetogFormata(FILE* fp, char* path)
 	if (strcmp(buffer, original)) {
 		fclose(fp);
 		moveBadFile(path);
+		printf("Format nije poznat.\n");
 		return 0; //Nije dobar format
 	}
 	else
@@ -18,16 +19,19 @@ int provjeraPetogFormata(FILE* fp, char* path)
 			{
 				fclose(fp);
 				moveBadFile(path);
+				printf("Format nije poznat.\n");
 				return 0; //Nije dobar format
 			}
 	if (sum1 != sum2)
 	{
 		fclose(fp);
 		moveBadFile(path);
+		printf("Sume nisu zadovoljavajuce.\n");
 		return 0; //Sume nisu zadovoljavajuce
 	}
 
 	fclose(fp);
+	printf("Odgovarajuci racun.\n");
 	return 1; //Sve je ok
 
 }
