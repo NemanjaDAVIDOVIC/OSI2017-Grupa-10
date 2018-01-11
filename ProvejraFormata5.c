@@ -35,7 +35,9 @@ int provjeraPetogFormata(FILE* fp, char* path)
 	return 1; //Sve je ok
 
 }
-
+/*
+Komentar.
+*/
 
 
 
