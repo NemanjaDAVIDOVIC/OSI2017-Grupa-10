@@ -9,7 +9,7 @@ char** scandirr()
 		files[i] = (char*)malloc(100 * sizeof(char));
 	int i = 0;
 	struct dirent *ent;
-	if ((dir = opendir(".\\racui")) != NULL) {
+	if ((dir = opendir(".\\racuni")) != NULL) {
 		while ((ent = readdir(dir)) != NULL) {
 			strcpy(files[i++], ent->d_name);
 		}
