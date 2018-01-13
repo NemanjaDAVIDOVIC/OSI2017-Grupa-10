@@ -2,12 +2,12 @@
 #include <string.h>
 #pragma warning(disable: 4996)
 
-char* provjeraFormata1()
+char* provjeraFormata1(char* fileName)
 {
 	FILE* file;
 	int br = 0;
 	/* TESTER: I ovdje kao i u prvojeti formata 3 bi bilo pozeljno da se datoteka navodi kao argument komandne linije. */
-	if (file = fopen("UcitaniRacun.txt", "r"))
+	if (file = fopen(fileName, "r"))
 	{
 		char str[42];
 		fgets(str, 8, file);
