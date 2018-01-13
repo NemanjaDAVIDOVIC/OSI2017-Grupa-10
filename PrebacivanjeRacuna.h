@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define losi "neodgovarajuci\\" //Folder u kojem se nalaze: neodgovarajuci racuni,
-#define racuni "racuni\\"		//neobradjeni racuni
+#define losi "neodgovarajuci/" //Folder u kojem se nalaze: neodgovarajuci racuni,
+#define racuni "racuni/"		//neobradjeni racuni
 #define MAX_SIZE 100
 
 int moveBadFile(char* file_name);

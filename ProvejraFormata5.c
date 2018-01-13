@@ -4,7 +4,7 @@ int provjeraPetogFormata(char* name)
 {
 	FILE *fp;
 	char buffer[100];
-	getPath(buffer, name, "racuni\\");
+	getPath(buffer, name, "racuni/");
 	if (fp = fopen(buffer, "rb"))
 	{
 		char original[30] = { "Sifra,Kolicina,Cijena,Ukupno\n" };

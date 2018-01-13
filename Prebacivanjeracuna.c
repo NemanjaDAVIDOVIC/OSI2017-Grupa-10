@@ -38,7 +38,7 @@ int moveBadFile(char* name)
 
 char* nameFromPath(char* path)
 {
-	char* name = strrchr(path, '\\');
+	char* name = strrchr(path, '/');
 	name += 1;
 	return name;
 }
@@ -51,7 +51,7 @@ void getPath(char* path,char* file_name,char* directory)
 	getcwd(path, MAX_SIZE * sizeof(char));
 	int i = 0;
 	while (path[i++] != '\0');
-	path[--i] = '\\';
+	path[--i] = '/';
 	path[++i] = '\0';
 	strcat(path, directory);
 	strcat(path, file_name);
