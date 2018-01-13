@@ -1,0 +1,105 @@
+# depslib dependency file v1.0
+1515007088 source:c:\c projects\projektni\prebacivanjeracuna.c
+	"PrebacivanjeRacuna.h"
+
+1515007088 c:\c projects\projektni\prebacivanjeracuna.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1515007088 source:c:\c projects\projektni\prijavanasistem.c
+	"PrijavaNaSistem.h"
+
+1515007088 c:\c projects\projektni\prijavanasistem.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1515007088 source:c:\c projects\projektni\provejraformata5.c
+	"ProvjeraFormata5.h"
+
+1515007088 c:\c projects\projektni\provjeraformata5.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"PrebacivanjeRacuna.h"
+
+1515007088 source:c:\c projects\projektni\provjeraformata1.c
+	"ProvjeraFormata1.h"
+	<string.h>
+
+1515007088 c:\c projects\projektni\provjeraformata1.h
+	<stdio.h>
+
+1515007088 source:c:\c projects\projektni\provjeraformata3.c
+	"ProvjeraFormata3.h"
+	<string.h>
+
+1515007088 c:\c projects\projektni\provjeraformata3.h
+	<stdio.h>
+
+1515007088 source:c:\c projects\projektni\provjeraformata4.c
+	"ProvjeraFormata4.h"
+	<string.h>
+
+1515007088 c:\c projects\projektni\provjeraformata4.h
+	<stdio.h>
+
+1515007088 source:c:\c projects\projektni\source.c
+	"PrijavaNaSistem.h"
+
+1515007088 source:c:\users\milica\git\osi2017-grupa-10\prebacivanjeracuna.c
+	"PrebacivanjeRacuna.h"
+
+1515007088 c:\users\milica\git\osi2017-grupa-10\prebacivanjeracuna.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1515007088 source:c:\users\milica\git\osi2017-grupa-10\prijavanasistem.c
+	"PrijavaNaSistem.h"
+
+1515007088 c:\users\milica\git\osi2017-grupa-10\prijavanasistem.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1515007088 source:c:\users\milica\git\osi2017-grupa-10\provejraformata5.c
+	"ProvjeraFormata5.h"
+
+1515007088 c:\users\milica\git\osi2017-grupa-10\provjeraformata5.h
+	<stdlib.h>
+	<stdio.h>
+	<string.h>
+	"PrebacivanjeRacuna.h"
+
+1515007088 source:c:\users\milica\git\osi2017-grupa-10\provjeraformata1.c
+	"ProvjeraFormata1.h"
+	<string.h>
+
+1515007088 c:\users\milica\git\osi2017-grupa-10\provjeraformata1.h
+	<stdio.h>
+
+1515007088 source:c:\users\milica\git\osi2017-grupa-10\provjeraformata3.c
+	"ProvjeraFormata3.h"
+	<string.h>
+
+1515007088 c:\users\milica\git\osi2017-grupa-10\provjeraformata3.h
+	<stdio.h>
+
+1515007088 source:c:\users\milica\git\osi2017-grupa-10\provjeraformata4.c
+	"ProvjeraFormata4.h"
+	<string.h>
+
+1515007088 c:\users\milica\git\osi2017-grupa-10\provjeraformata4.h
+	<stdio.h>
+
+1515007088 source:c:\users\milica\git\osi2017-grupa-10\racun2.c
+	"Header.h"
+	<string.h>
+
+1515007088 source:c:\users\milica\git\osi2017-grupa-10\source.c
+	"PrijavaNaSistem.h"
+
