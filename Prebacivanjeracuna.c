@@ -1,22 +1,21 @@
 #include "PrebacivanjeRacuna.h"
 
-int moveBadFile(char* path)
+int moveBadFile(char* name)
 {
 	FILE *fp;
 	char pathToBadBills[MAX_SIZE], *file = NULL;
-	char* file_name;
-	file_name = nameFromPath(path);
+	char pathToBill[MAX_SIZE];
 
-	getPath(pathToBadBills, file_name,losi);	//Postavlja putanju na folder za: neodgovarajuce racune
-
-	if (file = readFile(path))                      //Ucitava racun u  /char* file/
+	getPath(pathToBadBills, name,losi);	//Postavlja putanju na folder za: neodgovarajuce racune
+	getPath(pathToBill, name, racuni);
+	if (file = readFile(pathToBill))                      //Ucitava racun u  /char* file/
 	{
 		if (fp = fopen(pathToBadBills, "w"))
 		{
 			fprintf(fp, "%s", file);						//Upisuje originalni racun u novi folder
 			fclose(fp);
 			free(file);
-			if (!remove(path)) {
+			if (!remove(pathToBill)) {
 				printf("Racun uspjesno obrisan.\n"); //Brise originalni racun
 				return 1;
 			}

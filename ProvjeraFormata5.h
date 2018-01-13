@@ -8,5 +8,5 @@
 
 int checkLine(char*, int*, int*);
 
-//Pomocne
-int provjeraPetogFormata(FILE*,char*);
+
+int provjeraPetogFormata(char*);

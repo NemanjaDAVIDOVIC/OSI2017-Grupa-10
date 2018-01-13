@@ -1,38 +1,42 @@
 #include "ProvjeraFormata5.h"
 
-int provjeraPetogFormata(FILE* fp, char* path)
+int provjeraPetogFormata(char* name)
 {
-	char original[30] = { "Sifra,Kolicina,Cijena,Ukupno\n" };
+	FILE *fp;
 	char buffer[100];
-	int sum1 = 0, sum2 = 0;
-	fgets(buffer, sizeof(buffer), fp);
-
-	if (strcmp(buffer, original)) {
-		fclose(fp);
-		moveBadFile(path);
-		printf("Format nije poznat.\n");
-		return 0; //Nije dobar format
-	}
-	else
-		while (fgets(buffer, sizeof(buffer), fp))
-			if (!checkLine(buffer, &sum1, &sum2))
-			{
-				fclose(fp);
-				moveBadFile(path);
-				printf("Format nije poznat.\n");
-				return 0; //Nije dobar format
-			}
-	if (sum1 != sum2)
+	getPath(buffer, name, "racuni\\");
+	if (fp = fopen(buffer, "rb"))
 	{
-		fclose(fp);
-		moveBadFile(path);
-		printf("Sume nisu zadovoljavajuce.\n");
-		return 0; //Sume nisu zadovoljavajuce
-	}
+		char original[30] = { "Sifra,Kolicina,Cijena,Ukupno\n" };
+		int sum1 = 0, sum2 = 0;
+		fgets(buffer, sizeof(buffer), fp);
 
-	fclose(fp);
-	printf("Odgovarajuci racun.\n");
-	return 1; //Sve je ok
+		if (strcmp(buffer, original)) {
+			fclose(fp);
+			printf("Format nije poznat.\n");
+			return 0; //Nije dobar format
+		}
+		else
+			while (fgets(buffer, sizeof(buffer), fp))
+				if (!checkLine(buffer, &sum1, &sum2))
+				{
+					fclose(fp);
+					printf("Format nije poznat.\n");
+					return 0; //Nije dobar format
+				}
+		if (sum1 != sum2)
+		{
+			fclose(fp);
+			printf("Sume nisu zadovoljavajuce.\n");
+			return 0; //Sume nisu zadovoljavajuce
+		}
+
+		fclose(fp);
+		printf("Odgovarajuci racun.\n");
+		return 1; //Sve je ok
+	}
+	printf("Nije moguce otvoriti racun imena %s.\n", name);
+	return 0;
 
 }
 /*
