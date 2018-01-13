@@ -14,8 +14,8 @@ typedef struct _korisnik
 typedef struct _proizvod {
 	char naziv[21];
 	int kolicina;
-	int cijena;
-	int ukupno;
+	double cijena;
+	double ukupno;
 }PROIZVOD;
 
 typedef struct _kupac {
@@ -26,7 +26,7 @@ typedef struct _kupac {
 typedef struct _mjesec {
 	int mjesec;
 	int godina;
-	KUPAC* ukupnaProdaja; //svi kupci koji su kupovali u odedjenom mjesecu 
+	KUPAC* ukupnaProdaja; //svi kupci koji su kupovali u odedjenom mjesecu
 }MJESEC;
 
 #endif // !STRUKTURE_H
