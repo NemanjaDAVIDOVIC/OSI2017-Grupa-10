@@ -1,5 +1,6 @@
 #include <string.h>
-#include "Racun2Konacno"
+#include "Racun2.h"
+
 char* ProvjeraFormata2()
 {
 	FILE* file;
@@ -102,7 +103,7 @@ void obradaFormata2(char* fileName, PROIZVOD** proizvodi, KUPAC** kupci, MJESEC*
 
 		for (int i = 0; i < 9; ++i)
 			fgets(str, 100, file);
-		
+
 		for (int i = 0; i < br; ++i)
 		{
 			fgets(&(tempP[i].naziv), 8, file);

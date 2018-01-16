@@ -8,7 +8,7 @@
 #define ERROR "Ucitani racun nije ispravan."
 #define NOT_OPENED "Nije moguce otvoriti datoteku za citanje."
 
-int ProvjeraFormata2(char*);
+char* ProvjeraFormata2();
 void obradaFormata2(char*, PROIZVOD**, KUPAC**, MJESEC**);
 
 #endif // !PROVJERAFORMATA2_H
