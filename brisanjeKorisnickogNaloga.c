@@ -35,9 +35,7 @@ int brisanjeKorisnickogNaloga()
 			scanf("%d", &c);
 			if (c == k)
 				return 0;
-
-		}
-		while (c<1 || c>brojKorisnika);
+		}while (c<1 || c>brojKorisnika);
 		KORISNIK* noviNizKorisnika;
 		noviNizKorisnika = (KORISNIK*)malloc((brojKorisnika - 1) * sizeof(KORISNIK));
 		int j = 0;
