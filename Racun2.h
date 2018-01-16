@@ -1,15 +1,15 @@
-#pragma once
 #ifndef PROVJERAFORMATA2_H
-#define PROVJERAFORMATA2_H
-
-#include  <stdio.h>
+#define PROVJERAFORMATA_H
+#include <stdio.h>
+#include <stdlib.h>
+#include "ObradaRacuna.h"
 
 #define CORRECT "Ucitani racun je ispravan."
 #define ERROR "Ucitani racun nije ispravan."
-#define NOT_OPENED "Ne moze se otvoriti datoteka za citanje."
+#define NOT_OPENED "Nije moguce otvoriti datoteku za citanje."
 
-char* provjeraFormata2(); 
+int ProvjeraFormata2(char*);
+void obradaFormata2(char*, PROIZVOD**, KUPAC**, MJESEC**);
 
-#endif
-
+#endif // !PROVJERAFORMATA2_H
 
