@@ -1,8 +1,6 @@
-#include"Racun2.h"
 #include <string.h>
-#pragma warning(disable: 4996)
-
-char* provjeraFormata2()
+#include "Racun2Konacno"
+char* ProvjeraFormata2()
 {
 	FILE* file;
 	int br = 0;
@@ -66,6 +64,108 @@ char* provjeraFormata2()
 
 }
 
+void obradaFormata2(char* fileName, PROIZVOD** proizvodi, KUPAC** kupci, MJESEC** mjeseci)
+{
+	FILE* file;
+	KUPAC tempK;
+	PROIZVOD tempP[50];
+	int mj, god;
+	int br = -1;
+	double ukupnaCijena;
+	double pdv;
+	double ukupnoSaPdv;
+
+	if (file = fopen(fileName, "r"))
+	{
+
+		char str[101];
+		for (int i = 0; i < 5; ++i)
+			fgets(str, 100, file);
+
+		fgets(str, 8, file);
+		fgets(tempK.ime, 20, file);
+		fgets(str, 8, file);
+		int br = -1;
+
+		for (int i = 0; i < 2; ++i)
+			fgets(str, 100, file);
+		do {
+			fgets(str, 100, file);
+			br++;
+		} while (strcmp(str, "---------------------------------------\n") || !EOF);
+
+
+
+
+
+		rewind(file);
+
+		for (int i = 0; i < 9; ++i)
+			fgets(str, 100, file);
+		
+		for (int i = 0; i < br; ++i)
+		{
+			fgets(&(tempP[i].naziv), 8, file);
+			do {
+				fgets(str, 2, file);
+			} while (strcmp(str, "-"));
+
+			fscanf(file, "%d", &(tempP[i].kolicina));
+
+			do {
+				fgets(str, 2, file);
+			} while (strcmp(str, "-"));
+			fscanf(file, "%lf", &(tempP[i].cijena));
+			do {
+				fgets(str, 2, file);
+			} while (strcmp(str, "-"));
+			fscanf(file, "%lf", &(tempP[i].ukupno));
+			fgets(str, 100, file);
+		}
+
+		fgets(str, 100, file);
+		fgets(str, 100, file);
+		fgets(str, 8, file);
+		fscanf(file, "%lf", &ukupnaCijena);
+
+		fgets(str, 100, file);
+		fgets(str, 5, file);
+		fscanf(file, "%lf", &pdv);
+
+		fgets(str, 100, file);
+		fgets(str, 20, file);
+		fscanf(file, "%lf", &ukupnoSaPdv);
+
+		fgets(str, 100, file);
+		fgets(str, 8, file);
+		int n;
+		fscanf(file, "%d", &n);
+		fgets(str, 2, file);
+		fscanf(file, "%d", &mj);
+		fgets(str, 2, file);
+		fscanf(file, "%d", &god);
+
+
+
+		if (!provjeraVrijednostiRacuna(ukupnaCijena, pdv, ukupnoSaPdv, br, tempP, fileName))
+			return;
+
+		tempK.kupljeniProizvodi = (PROIZVOD*)malloc(sizeof(PROIZVOD) * br);
+		for (int i = 0; i < br; ++i)
+			tempK.kupljeniProizvodi[i] = tempP[i];
+
+		fclose(file);
+
+	}
+
+	else
+		printf("Nemoguce otvoriti fajl.");
+	//obradiProizode(br, proizvodi, tempP);
+	//obradiKupca(tempK, kupci, br);
+	//  obradiMjesec(mj, god, mjeseci, tempK);
+	free(tempK.kupljeniProizvodi);
+
+}
 
 
 
