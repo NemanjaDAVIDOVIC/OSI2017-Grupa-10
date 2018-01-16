@@ -2,6 +2,10 @@
 #ifndef STRUKTURE_H
 #define STRUKTURE_H
 
+int brP;
+int brK;
+int brM;
+
 typedef struct _korisnik
 {
 	char ime[21];
@@ -20,13 +24,16 @@ typedef struct _proizvod {
 
 typedef struct _kupac {
 	char ime[21];
+	int br;
 	PROIZVOD* kupljeniProizvodi;
 }KUPAC;
 
 typedef struct _mjesec {
 	int mjesec;
 	int godina;
-	KUPAC* ukupnaProdaja; //svi kupci koji su kupovali u odedjenom mjesecu
+	int br;
+	PROIZVOD* ukupnaProdaja;
 }MJESEC;
+
 
 #endif // !STRUKTURE_H

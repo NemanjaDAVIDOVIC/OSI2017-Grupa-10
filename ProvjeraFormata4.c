@@ -90,16 +90,15 @@ int ProvjeraFormata4(char* fileName)
 void obradaFormata4(char* fileName, PROIZVOD** proizvodi, KUPAC** kupci, MJESEC** mjeseci)
 {
     FILE* file;
-        KUPAC tempK;
-        PROIZVOD tempP[20];
-        int mj, god;
-        int br = -1;
-        double ukupnaCijena;
-        double pdv;
-        double ukupnoSaPdv;
+    KUPAC tempK;
+    int mj, god;
+    int br = -1;
+    double ukupnaCijena;
+    double pdv;
+    double ukupnoSaPdv;
+    char str[101];
     if(file = fopen(fileName, "r"))
     {
-        char str[101];
         for(int i = 0; i < 7; ++i)
             fgets(str, 100, file);
         do{
@@ -108,8 +107,15 @@ void obradaFormata4(char* fileName, PROIZVOD** proizvodi, KUPAC** kupci, MJESEC*
         }while(strcmp(str, "---------------------------------------\n") || !EOF);
 
         rewind(file);
+        fclose(file);
+    }
+    else
+        printf("Nemoguce otvoriti fajl.");
 
+    PROIZVOD tempP[br];
 
+    if(file = fopen(fileName, "r"))
+    {
 
         fgets(str, 8, file);
         fgets(tempK.ime, 20, file);
@@ -126,7 +132,7 @@ void obradaFormata4(char* fileName, PROIZVOD** proizvodi, KUPAC** kupci, MJESEC*
 
         for(int i = 0; i < br; ++i)
         {
-            fgets(&(tempP[i].naziv), 8, file);
+            fgets(tempP[i].naziv, 8, file);
             do{
                 fgets(str, 2, file);
             }while(strcmp(str, "-"));
@@ -155,12 +161,14 @@ void obradaFormata4(char* fileName, PROIZVOD** proizvodi, KUPAC** kupci, MJESEC*
 
         fgets(str, 20, file);
         fscanf(file, "%lf", &ukupnoSaPdv);
+
         if(!provjeraVrijednostiRacuna(ukupnaCijena, pdv, ukupnoSaPdv, br, tempP, fileName))
             return;
 
         tempK.kupljeniProizvodi = (PROIZVOD*) malloc(sizeof(PROIZVOD) * br);
         for(int i = 0; i < br; ++i)
             tempK.kupljeniProizvodi[i] = tempP[i];
+        tempK.br = br;
 
         fclose(file);
 
@@ -169,8 +177,8 @@ void obradaFormata4(char* fileName, PROIZVOD** proizvodi, KUPAC** kupci, MJESEC*
         printf("Nemoguce otvoriti fajl.");
 
     obradiProizode(br, proizvodi, tempP);
-    obradiKupca(tempK, kupci, br);
-//  obradiMjesec(mj, god, mjeseci, tempK);
+    obradiKupca(tempK, kupci);
+    obradiMjesec(mj, god, mjeseci, tempP, br);
     free(tempK.kupljeniProizvodi);
 }
 

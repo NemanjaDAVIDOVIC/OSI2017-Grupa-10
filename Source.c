@@ -5,11 +5,13 @@
 #include "Racun2.h"
 #include "Strukture.h"
 
+
+
 int main()
 {
-	KORISNIK *korisnik = NULL;
+	/*KORISNIK *korisnik = NULL;
 	citanjeIzDatoteke(&korisnik);
-	/*for (int i = 0; i < brojKorisnika && korisnik != NULL; i++)
+	for (int i = 0; i < brojKorisnika && korisnik != NULL; i++)
 	{
 		printf("%s\n", korisnik[i].ime);
 		printf("%s\n", korisnik[i].prezime);
@@ -23,34 +25,49 @@ int main()
     MJESEC* mj = NULL;
     if(ProvjeraFormata4("format4.txt"))
         obradaFormata4("format4.txt", &pr, &ku, &mj);
-    int brK = sizeof(ku) / sizeof(KUPAC);
-    int brP = sizeof(pr) / sizeof(PROIZVOD);
-    for(int i = 0; i < brP; ++i)
+    if(ProvjeraFormata4("format41.txt"))
+       obradaFormata4("format41.txt", &pr, &ku, &mj);
+
+    /*for(int i = 0; i < brP; ++i)
     {
         printf("\n%s", pr[i].naziv);
         printf("\n%d", pr[i].kolicina);
         printf("\n%lf", pr[i].cijena);
         printf("\n%lf", pr[i].ukupno);
-    }
+    }*/
 
 
-    for(int j = 0; j < brK; ++j)
+   /* printf("\nbrk%d", brK);
+   for(int j = 0; j < brK; ++j)
     {
         printf("\n%s", ku[j].ime);
-        for(int i = 0; i < brP; ++i)
+        printf("\n%d", ku[j].br);
+        for(int i = 0; i < ku[j].br; ++i)
+        {
+            printf("\n%s", ku[j].kupljeniProizvodi[i].naziv);
+            printf("\n%d", ku[j].kupljeniProizvodi[i].kolicina);
+            printf("\n%lf", ku[j].kupljeniProizvodi[i].cijena);
+            printf("\n%lf", ku[j].kupljeniProizvodi[i].ukupno);
+        }
+    }*/
+
+    for(int j = 0; j < brM; ++j)
     {
-        printf("\n%s", ku[j].kupljeniProizvodi[i].naziv);
-        printf("\n%d", ku[j].kupljeniProizvodi[i].kolicina);
-        printf("\n%lf", ku[j].kupljeniProizvodi[i].cijena);
-        printf("\n%lf", ku[j].kupljeniProizvodi[i].ukupno);
-    }
+        printf("\n\n%d %d", mj[j].mjesec, mj[j].godina);
+        printf("\nbr %d", mj[j].br);
+        for(int i = 0; i < mj[j].br; ++i)
+        {
+            printf("\n%s", mj[j].ukupnaProdaja[i].naziv);
+            printf("\n%d", mj[j].ukupnaProdaja[i].kolicina);
+            printf("\n%lf", mj[j].ukupnaProdaja[i].cijena);
+            printf("\n%lf", mj[j].ukupnaProdaja[i].ukupno);
+        }
     }
 
 
-    //obradaFormata4("format41.txt", &pr, &ku, &mj);
 
 	getchar();
 	getchar();
 
-	free(korisnik);
+//	free(korisnik);
 }

@@ -29,9 +29,8 @@ int provjeraVrijednostiRacuna(double ukupnaCijena, double pdv, double ukupnoSaPd
 
 } //GDJE GOD SE ISPISUJE GRESKA POTREBNO JE PREBACITI FAJL U FOLDER SA NEOGOVARAJUCIM!
 
-void obradiProizode(int br, PROIZVOD** nizProizvoda, PROIZVOD* proizvodiSaRacuna)
+void obradiProizode(int brPrSaRacuna, PROIZVOD** nizProizvoda, PROIZVOD* proizvodiSaRacuna)
 {
-    int brP = sizeof(*nizProizvoda) / sizeof(PROIZVOD);
     int i = 0;
     if(brP == 0)
     {
@@ -40,8 +39,8 @@ void obradiProizode(int br, PROIZVOD** nizProizvoda, PROIZVOD* proizvodiSaRacuna
         brP++;
         i++;
     }
-
-    for(i; i < br; ++i)
+    int flag = 0;
+    for(i; i < brPrSaRacuna; ++i)
     {
         for(int j = 0; j < brP; ++j)
         {
@@ -49,38 +48,75 @@ void obradiProizode(int br, PROIZVOD** nizProizvoda, PROIZVOD* proizvodiSaRacuna
             {
                 (*nizProizvoda)[j].kolicina += proizvodiSaRacuna[i].kolicina;
                 (*nizProizvoda)[j].ukupno += proizvodiSaRacuna[i].cijena * proizvodiSaRacuna[i].kolicina;
-                break;
-            }
-            else
-            {
-                *nizProizvoda = (PROIZVOD*) realloc(*nizProizvoda, sizeof(PROIZVOD)* (brP + 1));
-                (*nizProizvoda)[brP] = proizvodiSaRacuna[i];
-                brP++;
+                flag = 1;
                 break;
             }
         }
+        if(flag == 0)
+        {
+            *nizProizvoda = (PROIZVOD*) realloc(*nizProizvoda, sizeof(PROIZVOD)* (brP + 1));
+            (*nizProizvoda)[brP] = proizvodiSaRacuna[i];
+            brP++;
+        }
+        flag = 0;
 
     }
-    for(int i = 0; i < brP; ++i)
+    /*for(int i = 0; i < brP; ++i)
     {
     printf("\n%s", (*nizProizvoda)[i].naziv);
     printf("\n%d", (*nizProizvoda)[i].kolicina);
     printf("\n%lf", (*nizProizvoda)[i].cijena);
     printf("\n%lf", (*nizProizvoda)[i].ukupno);
-    }
+    }*/
 }
 
-void obradiKupca(KUPAC kupac, KUPAC** nizKupaca, int brP)
+int obradiProizode_pomocna(int brPrZaUnos, PROIZVOD** nizProizvoda, PROIZVOD* proizvodiSaRacuna, int brP)
 {
-    int brK = sizeof(*nizKupaca) / sizeof(KUPAC);
-    //printf("\n\n%d\n\n" , brK);
+    int i = 0, n = 0;
+    if(brP == 0)
+    {
+        *nizProizvoda = (PROIZVOD*) malloc(sizeof(PROIZVOD));
+        (*nizProizvoda)[brP] = proizvodiSaRacuna[0];
+        brP++;
+        n++;
+        i++;
+    }
+    int flag = 0;
+    for(i; i < brPrZaUnos; ++i)
+    {
+        for(int j = 0; j < brP; ++j)
+        {
+            if(!strcmp((*nizProizvoda)[j].naziv , proizvodiSaRacuna[i].naziv) && (*nizProizvoda)[j].cijena == proizvodiSaRacuna[i].cijena)
+            {
+                (*nizProizvoda)[j].kolicina += proizvodiSaRacuna[i].kolicina;
+                (*nizProizvoda)[j].ukupno += proizvodiSaRacuna[i].cijena * proizvodiSaRacuna[i].kolicina;
+                flag = 1;
+                break;
+            }
+        }
+        if(flag == 0)
+        {
+            *nizProizvoda = (PROIZVOD*) realloc(*nizProizvoda, sizeof(PROIZVOD)* (brP + 1));
+            (*nizProizvoda)[brP] = proizvodiSaRacuna[i];
+            n++;
+            brP++;
+        }
+        flag = 0;
+    }
+    return n;
+}
+
+
+void obradiKupca(KUPAC kupac, KUPAC** nizKupaca)
+{
     if(brK == 0)
     {
         *nizKupaca = (KUPAC*) malloc(sizeof(KUPAC));
         strcpy((*nizKupaca)[0].ime, kupac.ime);
-        (*nizKupaca)[0].kupljeniProizvodi = (PROIZVOD*) malloc(sizeof(PROIZVOD)*brP);
-        for(int i = 0; i < brP; ++i)
+        (*nizKupaca)[0].kupljeniProizvodi = (PROIZVOD*) malloc(sizeof(PROIZVOD)*kupac.br);
+        for(int i = 0; i < kupac.br; ++i)
             (*nizKupaca)[0].kupljeniProizvodi[i] = kupac.kupljeniProizvodi[i];
+        (*nizKupaca)[0].br = kupac.br;
         brK++;
     }
     else
@@ -89,8 +125,8 @@ void obradiKupca(KUPAC kupac, KUPAC** nizKupaca, int brP)
         for(int i = 0; i < brK; ++i)
             if(!strcmp(kupac.ime, (*nizKupaca)[i].ime))
             {
-                obradiProizode(brP, &((*nizKupaca)[i].kupljeniProizvodi), kupac.kupljeniProizvodi);
-                brK++;
+                int n = obradiProizode_pomocna(kupac.br, &((*nizKupaca)[i].kupljeniProizvodi), kupac.kupljeniProizvodi, (*nizKupaca)[i].br);
+                (*nizKupaca)[i].br += n;
                 flag = 1;
                 break;
             }
@@ -99,13 +135,13 @@ void obradiKupca(KUPAC kupac, KUPAC** nizKupaca, int brP)
             *nizKupaca = (KUPAC*) realloc(*nizKupaca, sizeof(KUPAC)*(brK + 1));
             strcpy((*nizKupaca)[brK].ime, kupac.ime);
             (*nizKupaca)[brK].kupljeniProizvodi = (PROIZVOD*) malloc(sizeof(PROIZVOD)*brP);
+            (*nizKupaca)[brK].br = kupac.br;
             for(int i = 0; i < brP; ++i)
                 (*nizKupaca)[brK].kupljeniProizvodi[i] = kupac.kupljeniProizvodi[i];
             brK++;
         }
-
     }
-    printf("\nkupci");
+   /* printf("\nkupci");
     for(int j = 0; j < brK; ++j)
     {
         printf("\n%s", (*nizKupaca)[j].ime);
@@ -117,69 +153,45 @@ void obradiKupca(KUPAC kupac, KUPAC** nizKupaca, int brP)
         printf("\n%lf", (*nizKupaca)[j].kupljeniProizvodi[i].ukupno);
     }
 
-    }
+    }*/
 }
 
-/*void obradiMjesec(int mj, int god, MJESEC** mjeseci, KUPAC kupac)
+void obradiMjesec(int mj, int god, MJESEC** nizMjeseci, PROIZVOD* proizvodiSaRacuna, int brPr)
 {
-    int brM = sizeof(*mjeseci) / sizeof(MJESEC);
-    int brP = sizeof(kupac.kupljeniProizvodi) / sizeof(PROIZVOD);
     if(brM == 0)
     {
-        *mjeseci = (MJESEC*) realloc(*mjeseci, sizeof(MJESEC));
-        (*mjeseci)[0].mjesec = mj;
-        (*mjeseci)[0].godina = god;
-        (*mjeseci)[0].ukupnaProdaja = (KUPAC*) malloc(sizeof(KUPAC));
-        (*mjeseci)[0].ukupnaProdaja[0].kupljeniProizvodi = (PROIZVOD*) malloc(sizeof(PROIZVOD)*brP);
-        for(int i = 0; i < brP; ++i)
-        {
-            (*mjeseci)[0].ukupnaProdaja[0].kupljeniProizvodi[i] = kupac.kupljeniProizvodi[i];
-        }
+        *nizMjeseci = (MJESEC*) malloc(sizeof(MJESEC));
+        (*nizMjeseci)[0].mjesec = mj;
+        (*nizMjeseci)[0].godina = god;
+        (*nizMjeseci)[0].br = brP;
+        (*nizMjeseci)[0].ukupnaProdaja = (PROIZVOD*) malloc(sizeof(PROIZVOD) * (*nizMjeseci)[0].br);
+        for(int i = 0; i < (*nizMjeseci)[0].br; ++i)
+            (*nizMjeseci)[0].ukupnaProdaja[i] = proizvodiSaRacuna[i];
         brM++;
     }
     else
     {
         int flag = 0;
         for(int i = 0; i < brM; ++i)
-            if((*mjeseci)[i].mjesec == mj && (*mjeseci)[i].godina == god)
+            if((*nizMjeseci)[i].mjesec == mj && (*nizMjeseci)[i].godina == god)
             {
-                (*mjeseci)[i].ukupnaProdaja = NULL;
-                obradiKupca(kupac, &((*mjeseci)[i].ukupnaProdaja), brP);
-                brM++;
+                int n = obradiProizode_pomocna(brPr, &((*nizMjeseci)[i].ukupnaProdaja), proizvodiSaRacuna, (*nizMjeseci)[i].br);
+                (*nizMjeseci)[i].br += n;
                 flag = 1;
                 break;
             }
         if(flag == 0)
         {
-            *mjeseci = (MJESEC*) realloc(*mjeseci, sizeof(MJESEC)*(brM + 1));
-            (*mjeseci)[brM].mjesec = mj;
-            (*mjeseci)[brM].godina = god;
-            (*mjeseci)[brM].ukupnaProdaja = (KUPAC*) malloc(sizeof(KUPAC));
-            (*mjeseci)[brM].ukupnaProdaja[brM].kupljeniProizvodi = (PROIZVOD*) malloc(sizeof(PROIZVOD)*brP);
-            for(int i = 0; i < brP; ++i)
-            {
-                (*mjeseci)[brM].ukupnaProdaja[brM].kupljeniProizvodi[i] = kupac.kupljeniProizvodi[i];
-            }
+            *nizMjeseci = (MJESEC*) realloc(*nizMjeseci, sizeof(MJESEC)* (brM + 1));
+            (*nizMjeseci)[brM].mjesec = mj;
+            (*nizMjeseci)[brM].godina = god;
+            (*nizMjeseci)[brM].br = brPr;
+            (*nizMjeseci)[brM].ukupnaProdaja = (PROIZVOD*) malloc(sizeof(PROIZVOD) * brPr);
+            for(int i = 0; i < (*nizMjeseci)[brM].br; ++i)
+                (*nizMjeseci)[brM].ukupnaProdaja[i] = proizvodiSaRacuna[i];
             brM++;
-        }
-    }
-
-    for(int k = 0; k < brM; ++k)
-    {
-        printf("\nmj %d, god %d", (*mjeseci)[k].mjesec, (*mjeseci)[k].godina);
-        for(int j = 0; j < 1; ++j)
-        {
-            printf("\n%s", (*mjeseci)[k].ukupnaProdaja[j].ime);
-            for(int i = 0; i < brP; ++i)
-            {
-                printf("\n%s", (*mjeseci)[k].ukupnaProdaja[j].kupljeniProizvodi[i].naziv);
-                printf("\n%d", (*mjeseci)[k].ukupnaProdaja[j].kupljeniProizvodi[i].kolicina);
-                printf("\n%lf", (*mjeseci)[k].ukupnaProdaja[j].kupljeniProizvodi[i].cijena);
-                printf("\n%lf", (*mjeseci)[k].ukupnaProdaja[j].kupljeniProizvodi[i].ukupno);
-            }
         }
     }
 
 
 }
-*/
