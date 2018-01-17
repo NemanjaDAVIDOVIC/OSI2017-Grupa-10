@@ -13,7 +13,7 @@
 
 
 
-void obradaSvihRacuna(char**, PROIZVOD**, KUPAC**, MJESEC**);     // NECE BITI URADJENA FUNKCIJA DOK SE NE ZAVRSE OSTALI FORMATI
+void obradaSvihRacuna(char**, PODACI**, PROIZVOD**, KUPAC**, MJESEC**);     // NECE BITI URADJENA FUNKCIJA DOK SE NE ZAVRSE OSTALI FORMATI
 int provjeraVrijednostiRacuna(double, double, double, int, PODACI*, char*);
 
 void obradiPodatke(PODACI**, PODACI*, int);

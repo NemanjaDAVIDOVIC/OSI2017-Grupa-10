@@ -87,7 +87,7 @@ int ProvjeraFormata4(char* fileName)
 
 }
 
-void obradaFormata4(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC** ku, MJESEC** mjesec)
+int obradaFormata4(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC** ku, MJESEC** mjesec)
 {
     FILE* file;
     char tempK[21];
@@ -132,7 +132,6 @@ void obradaFormata4(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC**
         tempK[k] = '\0';
         fgets(str, 8, file);
 
-        dodajKupca(ku, tempK);
 
         int n;
         fscanf(file, "%d", &n);
@@ -143,7 +142,6 @@ void obradaFormata4(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC**
         for(int i = 0; i < 6; ++i)
             fgets(str, 100, file);
 
-        dodajMjesec(mjesec, mj, god);
 
         for(int i = 0; i < br; ++i)
         {
@@ -164,8 +162,6 @@ void obradaFormata4(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC**
             }while(strcmp(str, "-"));
             fscanf(file, "%lf", &(tempP[i].ukupno));
             fgets(str, 100, file);
-
-            dodajProizvod(pr, tempP[i].naziv_proizvoda);
         }
 
         fgets(str, 100, file);
@@ -183,7 +179,14 @@ void obradaFormata4(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC**
         fscanf(file, "%lf", &ukupnoSaPdv);
 
         if(!provjeraVrijednostiRacuna(ukupnaCijena, pdv, ukupnoSaPdv, br, tempP, fileName))
-            return;
+            return 0;
+
+        dodajKupca(ku, tempK);
+        dodajMjesec(mjesec, mj, god);
+        for(int i = 0; i < br; ++i)
+        {
+            dodajProizvod(pr, tempP[i].naziv_proizvoda);
+        }
 
         fclose(file);
 
@@ -192,4 +195,5 @@ void obradaFormata4(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC**
         printf("Nemoguce otvoriti fajl.");
 
     obradiPodatke(nizPodataka, tempP, br);
+    return 1;
 }
