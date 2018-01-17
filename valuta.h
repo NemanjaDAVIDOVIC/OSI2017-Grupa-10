@@ -4,10 +4,10 @@
 typedef struct valuta
 {
 	char oznaka[4];
-	
+
 }VALUTA;
 
-VALUTA ucitajValutu();
+char* ucitajValutu();
 
 #endif //VALUTA_H
 
