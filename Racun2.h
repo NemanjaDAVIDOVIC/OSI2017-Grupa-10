@@ -9,7 +9,7 @@
 #define NOT_OPENED "Nije moguce otvoriti datoteku za citanje."
 
 char* ProvjeraFormata2();
-void obradaFormata2(char*, PROIZVOD**, KUPAC**, MJESEC**);
+void obradaFormata2(char*,PODACI**, PROIZVOD**, KUPAC**, MJESEC**);
 
 #endif // !PROVJERAFORMATA2_H
 

@@ -5,6 +5,7 @@
 int brP;
 int brK;
 int brM;
+int brPodataka;
 
 typedef struct _korisnik
 {
@@ -17,23 +18,26 @@ typedef struct _korisnik
 
 typedef struct _proizvod {
 	char naziv[21];
-	int kolicina;
-	double cijena;
-	double ukupno;
 }PROIZVOD;
 
 typedef struct _kupac {
 	char ime[21];
-	int br;
-	PROIZVOD* kupljeniProizvodi;
 }KUPAC;
 
 typedef struct _mjesec {
 	int mjesec;
 	int godina;
-	int br;
-	PROIZVOD* ukupnaProdaja;
 }MJESEC;
+
+typedef struct _podaci{
+    char naziv_proizvoda[21];
+    int kolicina;
+    double cijena;
+    double ukupno;
+    char ime_kupca[21];
+    int mjesec;
+    int godina;
+}PODACI;
 
 
 #endif // !STRUKTURE_H
