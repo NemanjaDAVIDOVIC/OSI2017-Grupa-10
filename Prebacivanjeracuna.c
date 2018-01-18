@@ -1,28 +1,27 @@
 #include "PrebacivanjeRacuna.h"
 
-int moveBadFile(char* name)
+int moveFile(char* fileName,char* folder)
 {
 	FILE *fp;
-	char pathToBadBills[MAX_SIZE], *file = NULL;
+	char destinationPath[MAX_SIZE], *file = NULL;
 	char pathToBill[MAX_SIZE];
-
-	getPath(pathToBadBills, name,losi);	//Postavlja putanju na folder za: neodgovarajuce racune
-	getPath(pathToBill, name, racuni);
-	if (file = readFile(pathToBill))                      //Ucitava racun u  /char* file/
+	char*name = nameFromPath(fileName);
+	getPath(destinationPath, name, folder);	//Postavlja putanju na folder za: neodgovarajuce racune
+	if (file = readFile(fileName))                      //Ucitava racun u  /char* file/
 	{
-		if (fp = fopen(pathToBadBills, "w"))
+		if (fp = fopen(destinationPath, "w"))
 		{
 			fprintf(fp, "%s", file);						//Upisuje originalni racun u novi folder
 			fclose(fp);
 			free(file);
-			if (!remove(pathToBill)) {
+			if (!remove(fileName)) {
 				printf("Racun uspjesno obrisan.\n"); //Brise originalni racun
 				return 1;
 			}
-			printf("Racun nije bil moguce obrisati.\n");
+			printf("Racun nije bilo moguce obrisati.\n");
 			return -1;
 		}
-		else 
+		else
 		{
 			printf("Nije moguce prebaciti neodgovarajuci racun.\n");
 			return 0;
@@ -46,7 +45,7 @@ char* nameFromPath(char* path)
 
 
 
-void getPath(char* path,char* file_name,char* directory)
+void getPath(char* path, char* file_name, char* directory)
 {
 	getcwd(path, MAX_SIZE * sizeof(char));
 	int i = 0;
@@ -64,11 +63,12 @@ char* readFile(char* path)
 	if (fp = fopen(path, "r"))
 	{
 		while (fgetc(fp) != EOF)
-			++counter;					//broj karaktera u fajlu
+			++counter;			//broj karaktera u fajlu
 
-		file = (char*)malloc(counter * sizeof(char));
+		file = (char*)malloc((counter+2) * sizeof(char));
 		rewind(fp);
 		fread(file, sizeof(char), counter, fp);			//file sadrzi sadrzaj cijelog racuna
+		file[counter] = '\0';
 		fclose(fp);
 		return file;
 	}
