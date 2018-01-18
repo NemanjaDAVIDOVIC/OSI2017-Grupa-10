@@ -27,7 +27,7 @@ int provjeraVrijednostiRacuna(double ukupnaCijena, double pdv, double ukupnoSaPd
         }
     }
 
-} //GDJE GOD SE ISPISUJE GRESKA POTREBNO JE PREBACITI FAJL U FOLDER SA NEOGOVARAJUCIM!
+}
 
 
 

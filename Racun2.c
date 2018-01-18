@@ -1,11 +1,12 @@
 #include <string.h>
 #include "Racun2.h"
 
-char* ProvjeraFormata2()
+int ProvjeraFormata2(char* fileName)
 {
+
 	FILE* file;
-	int br = 0;
-	if (file = fopen("text.txt", "r"))
+	int br = 0, eof = -5;
+	if (file = fopen(fileName, "r"))
 	{
 		char str[60];
 		fgets(str, 35, file);
@@ -33,10 +34,14 @@ char* ProvjeraFormata2()
 		do
 		{
 			pom--;
-			fgets(str, 50, file);
-		} while (strcmp(str, "---------------------------------------\n") && (pom));
+			eof = fgets(str, 50, file);
+		} while (strcmp(str, "---------------------------------------\n") && (pom) && eof != 0);
 		if (pom == 0)
-			return ERROR;
+			return 0;
+        if (eof == 0) {
+			fclose(file);
+			return 0;
+		}
 		br++;
 		fgets(str, 50, file);
 		fgets(str, 8, file);
@@ -54,18 +59,23 @@ char* ProvjeraFormata2()
 		if (!strcmp(str, "Datum: "))
 			br++;
 
-		if (br == 10)
-			return CORRECT;
-		else
-			return ERROR;
 		fclose(file);
 
+		if (br == 10)
+			return 1;
+		else
+			return 0;
+
 	}
-	else return NOT_OPENED;
+	else
+    {
+        printf("Nemoguce otvoriti fajl.");
+        return 0;
+    }
 
 }
 
-void obradaFormata2(char* fileName,PODACI** nizPodataka, PROIZVOD** proizvodi, KUPAC** kupci, MJESEC** mjeseci)
+int obradaFormata2(char* fileName, PODACI** nizPodataka, PROIZVOD** proizvodi, KUPAC** kupci, MJESEC** mjeseci)
 {
 	FILE* file;
 	char tempK[21];
@@ -98,7 +108,6 @@ void obradaFormata2(char* fileName,PODACI** nizPodataka, PROIZVOD** proizvodi, K
         tempK[k] = '\0';
 		fgets(str, 8, file);
 
-		dodajKupca(kupci, tempK);
 
 		for (int i = 0; i < 2; ++i)
 			fgets(str, 100, file);
@@ -112,7 +121,7 @@ void obradaFormata2(char* fileName,PODACI** nizPodataka, PROIZVOD** proizvodi, K
 	else
 		printf("Nemoguce otvoriti fajl.");
 
-	PODACI tempP[br];
+	PODACI* tempP = (PODACI*) malloc(sizeof(PODACI) * br);
 
     if (file = fopen(fileName, "r"))
 	{
@@ -139,7 +148,6 @@ void obradaFormata2(char* fileName,PODACI** nizPodataka, PROIZVOD** proizvodi, K
 			} while (strcmp(str, "-"));
 			fscanf(file, "%lf", &(tempP[i].ukupno));
 			fgets(str, 100, file);
-			dodajProizvod(proizvodi, tempP[i].naziv_proizvoda);
 		}
 
 		fgets(str, 100, file);
@@ -164,26 +172,35 @@ void obradaFormata2(char* fileName,PODACI** nizPodataka, PROIZVOD** proizvodi, K
 		fgets(str, 2, file);
 		fscanf(file, "%d", &god);
 
+
+
+
+		if (!provjeraVrijednostiRacuna(ukupnaCijena, pdv, ukupnoSaPdv, br, tempP, fileName))
+        {
+            fclose(file);
+			return 0;
+        }
+
         dodajMjesec(mjeseci, mj, god);
         for (int i = 0; i < br; ++i)
 		{
 		    tempP[i].mjesec = mj;
             tempP[i].godina = god;
+            dodajProizvod(proizvodi, tempP[i].naziv_proizvoda);
 		}
-
-
-
-		if (!provjeraVrijednostiRacuna(ukupnaCijena, pdv, ukupnoSaPdv, br, tempP, fileName))
-			return;
+		dodajKupca(kupci, tempK);
 
 		fclose(file);
 
 	}
 
 	else
+    {
 		printf("Nemoguce otvoriti fajl.");
+        return 0;
+    }
 	obradiPodatke(nizPodataka, tempP, br);
-
+    return 1;
 }
 
 
