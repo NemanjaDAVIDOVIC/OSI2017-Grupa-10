@@ -13,10 +13,15 @@ int main()
     PROIZVOD* pr = NULL;
     KUPAC* ku = NULL;
     MJESEC* mj = NULL;
+    if(provjeraFormata1("format1.txt"))
+        obradaFormata1("format1.txt", &niz, &pr, &ku, &mj);
+    if(ProvjeraFormata2("format2.txt"))
+        obradaFormata2("format2.txt", &niz, &pr, &ku, &mj);
+    if(provjeraFormata3("format3.txt"))
+        obradaFormata3("format3.txt", &niz, &pr, &ku, &mj);
     if(ProvjeraFormata4("format4.txt"))
         obradaFormata4("format4.txt", &niz, &pr, &ku, &mj);
-    if(ProvjeraFormata4("format41.txt"))
-        obradaFormata4("format41.txt", &niz, &pr, &ku, &mj);
+
     for(int i = 0; i < brPodataka; ++i)
     {
         printf("\n%s", niz[i].ime_kupca);

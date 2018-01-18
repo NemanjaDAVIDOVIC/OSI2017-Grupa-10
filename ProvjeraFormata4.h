@@ -4,9 +4,6 @@
 #include <stdlib.h>
 #include "ObradaRacuna.h"
 
-#define CORRECT "Ucitani racun je ispravan."
-#define ERROR "Ucitani racun nije ispravan."
-#define NOT_OPENED "Nije moguce otvoriti datoteku za citanje."
 
 int ProvjeraFormata4(char*);
 int obradaFormata4(char*, PODACI**, PROIZVOD**, KUPAC**, MJESEC**);

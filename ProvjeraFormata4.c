@@ -5,7 +5,7 @@
 int ProvjeraFormata4(char* fileName)
 {
 	FILE* file;
-	int brojac = 0;
+	int brojac = 0, eof = -5;
 	if (file = fopen(fileName, "r"))
 	{
 		char str[42];
@@ -34,15 +34,25 @@ int ProvjeraFormata4(char* fileName)
 			brojac++;
 		do
 		{
-			fgets(str, 42, file);
-		} while (strcmp(str, "---------------------------------------\n"));
+			eof = fgets(str, 42, file);
+		} while (strcmp(str, "---------------------------------------\n") && eof != 0);
+		if(eof == 0)
+        {
+            fclose(file);
+            return 0;
+        }
 		brojac++;
 		fgets(str, 8, file);
 		if (!strcmp(str, "Ukupno:"))
 			brojac++;
 		do {
-			fgets(str, 2, file);
-		} while (strcmp(str, "\n"));
+			eof = fgets(str, 2, file);
+		} while (strcmp(str, "\n") && eof != 0);
+		if(eof == 0)
+        {
+            fclose(file);
+            return 0;
+        }
 		brojac++;
 		fgets(str, 6, file);
 		if (!strcmp(str, "PDV: "))
@@ -50,8 +60,13 @@ int ProvjeraFormata4(char* fileName)
 
 		do
 		{
-			fgets(str, 2, file);
-		} while (strcmp(str, "\n"));
+			eof = fgets(str, 2, file);
+		} while (strcmp(str, "\n") && eof != 0);
+		if(eof == 0)
+        {
+            fclose(file);
+            return 0;
+        }
 		brojac++;
 		fgets(str, 42, file);
 		if (!strcmp(str, "=======================================\n"))
@@ -61,8 +76,13 @@ int ProvjeraFormata4(char* fileName)
 			brojac++;
 		do
 		{
-			fgets(str, 2, file);
-		} while (strcmp(str, "\n"));
+			eof = fgets(str, 2, file);
+		} while (strcmp(str, "\n") && eof != 0);
+		if(eof == 0)
+        {
+            fclose(file);
+            return 0;
+        }
 		fgets(str, 40, file);
 		if (!strcmp(str, "\n"))
 			brojac++;
@@ -82,8 +102,7 @@ int ProvjeraFormata4(char* fileName)
 		fclose(file);
 	}
 	else
-		printf("Nije moguce otvoriti datoteku za citanje.");
-	return 0;
+        return 0;
 
 }
 
@@ -109,9 +128,9 @@ int obradaFormata4(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC** 
         fclose(file);
     }
     else
-        printf("Nemoguce otvoriti fajl.");
+        return 0;
 
-    PODACI tempP[br];
+    PODACI* tempP = (PODACI*) malloc(sizeof(PODACI) * br);
 
     if(file = fopen(fileName, "r"))
     {
@@ -177,9 +196,13 @@ int obradaFormata4(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC** 
 
         fgets(str, 20, file);
         fscanf(file, "%lf", &ukupnoSaPdv);
+        fclose(file);
 
         if(!provjeraVrijednostiRacuna(ukupnaCijena, pdv, ukupnoSaPdv, br, tempP, fileName))
+        {
+            free(tempP);
             return 0;
+        }
 
         dodajKupca(ku, tempK);
         dodajMjesec(mjesec, mj, god);
@@ -188,12 +211,14 @@ int obradaFormata4(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC** 
             dodajProizvod(pr, tempP[i].naziv_proizvoda);
         }
 
-        fclose(file);
-
     }
     else
-        printf("Nemoguce otvoriti fajl.");
+    {
+        free(tempP);
+        return 0;
+    }
 
     obradiPodatke(nizPodataka, tempP, br);
+    free(tempP);
     return 1;
 }

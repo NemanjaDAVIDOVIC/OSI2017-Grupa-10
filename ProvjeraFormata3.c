@@ -178,10 +178,11 @@ int obradaFormata3(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC** 
 	}
 	else
     {
-
         free(tempP);
         return 0;
+
     }
+
 
 	obradiPodatke(nizPodataka, tempP, br);
     free(tempP);

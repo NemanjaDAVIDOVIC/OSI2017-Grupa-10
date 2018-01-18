@@ -4,7 +4,6 @@ int provjeraVrijednostiRacuna(double ukupnaCijena, double pdv, double ukupnoSaPd
 {
     if(ukupnoSaPdv != pdv + ukupnaCijena)
     {
-        printf("greska");
         return 0;
     }
     else
@@ -13,7 +12,6 @@ int provjeraVrijednostiRacuna(double ukupnaCijena, double pdv, double ukupnoSaPd
         for(int i = 0; i < brP; ++i)
             if(proizvodi[i].cijena * proizvodi[i].kolicina != proizvodi[i].ukupno)
                 {
-                    printf("greska1");
                     return 0;
                 }
             else
@@ -21,7 +19,6 @@ int provjeraVrijednostiRacuna(double ukupnaCijena, double pdv, double ukupnoSaPd
 
         if(uk != ukupnaCijena)
         {
-            printf("greska2");
             return 0;
 
         }

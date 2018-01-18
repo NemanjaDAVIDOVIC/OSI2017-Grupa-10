@@ -94,7 +94,7 @@ int obradaFormata1(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC** 
         fclose(file);
     }
     else
-        printf("Nemoguce otvoriti fajl.");
+        return 0;
 
     PODACI* tempP= (PODACI*) malloc(sizeof(PODACI) * br);
 
@@ -163,7 +163,10 @@ int obradaFormata1(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC** 
         fclose(file);
 
         if(!provjeraVrijednostiRacuna(ukupnaCijena, pdv, ukupnoSaPdv, br, tempP, fileName))
+        {
+            free(tempP);
             return 0;
+        }
 
         dodajKupca(ku, tempK);
         dodajMjesec(mjesec, mj, god);
@@ -175,7 +178,7 @@ int obradaFormata1(char* fileName, PODACI** nizPodataka, PROIZVOD** pr, KUPAC** 
     }
     else
     {
-        printf("Nemoguce otvoriti fajl.");
+        free(tempP);
         return 0;
     }
 

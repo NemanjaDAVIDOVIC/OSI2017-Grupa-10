@@ -68,10 +68,7 @@ int ProvjeraFormata2(char* fileName)
 
 	}
 	else
-    {
-        printf("Nemoguce otvoriti fajl.");
         return 0;
-    }
 
 }
 
@@ -119,7 +116,7 @@ int obradaFormata2(char* fileName, PODACI** nizPodataka, PROIZVOD** proizvodi, K
         fclose(file);
 	}
 	else
-		printf("Nemoguce otvoriti fajl.");
+		return 0;
 
 	PODACI* tempP = (PODACI*) malloc(sizeof(PODACI) * br);
 
@@ -132,7 +129,7 @@ int obradaFormata2(char* fileName, PODACI** nizPodataka, PROIZVOD** proizvodi, K
 		{
             strcpy(tempP[i].ime_kupca, tempK);
 
-			fgets(&(tempP[i].naziv_proizvoda), 8, file);
+			fgets(tempP[i].naziv_proizvoda, 8, file);
 			do {
 				fgets(str, 2, file);
 			} while (strcmp(str, "-"));
@@ -178,6 +175,7 @@ int obradaFormata2(char* fileName, PODACI** nizPodataka, PROIZVOD** proizvodi, K
 		if (!provjeraVrijednostiRacuna(ukupnaCijena, pdv, ukupnoSaPdv, br, tempP, fileName))
         {
             fclose(file);
+            free(tempP);
 			return 0;
         }
 
@@ -196,10 +194,11 @@ int obradaFormata2(char* fileName, PODACI** nizPodataka, PROIZVOD** proizvodi, K
 
 	else
     {
-		printf("Nemoguce otvoriti fajl.");
+        free(tempP);
         return 0;
     }
 	obradiPodatke(nizPodataka, tempP, br);
+    free(tempP);
     return 1;
 }
 
