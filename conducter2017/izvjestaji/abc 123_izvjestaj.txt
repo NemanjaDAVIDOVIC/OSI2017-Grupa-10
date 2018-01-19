@@ -1,0 +1,6 @@
+IME KUPCA: ABC
+NAZIV PROIZVODA: abc 123
+Cijena: 5.00
+Kolicina: 40
+Ukupno: 200.00 BAM
+=====================================

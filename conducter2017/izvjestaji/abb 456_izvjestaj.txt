@@ -1,0 +1,6 @@
+IME KUPCA: ABC
+NAZIV PROIZVODA: abb 456
+Cijena: 10.00
+Kolicina: 80
+Ukupno: 800.00 BAM
+=====================================

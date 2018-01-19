@@ -1,0 +1,6 @@
+#pragma once
+#include "windows.h"
+#include "resource.h"
+
+IDI_PROJEKTNI	ICON	"48.ico"
+IDI_SMALL	ICON	"16.ico"
