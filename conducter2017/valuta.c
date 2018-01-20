@@ -20,28 +20,27 @@ char* ucitajValutu()
 		rewind(fp);
 		printf("Izaberite koju valutu zelite da koristite: \n");
 		int n;
-		system("cls");
-		printf("Unesite broj zeljene valute: \n");
-		for (int i = 0; i < bv; i++)
-			printf("%d. %s\n", i + 1, nizVal[i].oznaka);
-		scanf("%d", &n);
+		do {
+			system("cls");
+			printf("Unesite broj zeljene valute: \n");
+			for (int i = 0; i < bv; i++)
+				printf("%d. %s\n", i + 1, nizVal[i].oznaka);
+			if (scanf("%d", &n) != 1)
+			{
+				printf("Pogresan unos. Pokusajte ponovo.\n");
+				getchar();
+				getchar();
+				getchar();
+			}
+		} while (n < 1 || n > bv);
 
-		int brojac = 0;
-		if (n == 1)
-		{
-			fclose(fp);
-			return nizVal[0].oznaka;
-		}
-		else if (n == 2)
-		{
-			fclose(fp);
-			return nizVal[1].oznaka;
-		}
-		else if (n == 3)
-		{
-			fclose(fp);
-			return nizVal[2].oznaka;
-		}
+		fclose(fp);
+		return nizVal[n-1].oznaka;
+	}
+	else
+	{
+		printf("Nije moguce otvorite datoteku >> Valute.txt <<\n");
+		getchar();
 	}
 }
 

@@ -9,4 +9,4 @@
 int checkLine(char*, int*, int*);
 
 
-int provjeraPetogFormata(char*);
+int provjeraFormata5(char*);

@@ -19,17 +19,9 @@ int dodavanjeKorisnickogNaloga()
 	citanjeIzDatoteke(&korisnici);
 	printf("Unesite korisnicko ime, a zatim PIN kod: \n");
 	printf("Korisnicko ime: ");
-	do {
-		scanf("%s", korisnickoIme);
-		if (postojiKorisnickoIme(korisnici, korisnickoIme))
-			printf("\tKorisnicko ime postoji!\nKorisnicko ime: ");
-	} while (postojiKorisnickoIme(korisnici, korisnickoIme));
+	scanf("%s", korisnickoIme);
 	printf("PIN: ");
-	do {
-		scanf("%s", pinKod);
-		if (!provjeraPINa(pinKod))
-			printf("\tNepravilno unesen PIN!\nPIN: ");
-	} while (!provjeraPINa(pinKod));
+	scanf("%s", pinKod);
 	if (provjeraPINa(pinKod))
 		if (!provjeraKorisnika(korisnickoIme, pinKod, korisnici, &korisnik))
 		{
@@ -42,13 +34,19 @@ int dodavanjeKorisnickogNaloga()
 				printf("Unesite korisnicku grupu:\n"
 					"1. analiticar\n"
 					"2. administrator\n");
-				scanf("%d", &temp);
+				if(scanf("%d", &temp) != 1)
+				{
+					printf("Pogresan unos.\n");
+					getchar();
+					getchar();
+					getchar();
+				}
 				if (temp == 1)
 					strcpy(korisnickaGrupa, "analiticar");
 				else if (temp == 2)
 					strcpy(korisnickaGrupa, "administrator");
-				else
-					printf("Pogresan unos, pokusajte ponovo.\n");
+				/*else
+					printf("Pogresan unos, pokusajte ponovo.\n");*/
 			} while (temp != 1 && temp != 2); //TODO: ne radi za karaktere
 
 			if (file = fopen("Korisnici.txt", "a"))
@@ -62,18 +60,11 @@ int dodavanjeKorisnickogNaloga()
 			fclose(file);
 		}
 		else
-			printf("Uneseni podaci vec postoje!");
+			printf("Uneseni podaci vec postoje!"), getchar(), getchar();
 	free(korisnici);
 	if (br == 5)return 1; // Uspjesno uneseni podaci u datoteku o novom korisniku
 	else return 0;
-}
 
-int postojiKorisnickoIme(KORISNIK* korisnici, char* k_ime)
-{
-	for (int i = 0; i < brojKorisnika; ++i)
-		if (!strcmp(korisnici[i].korisnicko_ime, k_ime))
-		{
-			return 1;
-		}
-	return 0;
+	getchar();
+	getchar();
 }

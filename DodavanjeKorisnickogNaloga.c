@@ -15,19 +15,40 @@ int dodavanjeKorisnickogNaloga()
 	char imeKorisnika[21];
 	char prezimeKorisnika[21];
 	char korisnickaGrupa[14];
-	int br = 0;
+	int br = 0, temp = -1;
 	citanjeIzDatoteke(&korisnici);
 	printf("Unesite korisnicko ime, a zatim PIN kod: \n");
+	printf("Korisnicko ime: ");
 	scanf("%s", korisnickoIme);
+	printf("PIN: ");
 	scanf("%s", pinKod);
 	if (provjeraPINa(pinKod))
 		if (!provjeraKorisnika(korisnickoIme, pinKod, korisnici, &korisnik))
 		{
 			printf("Unesite ime i prezime novog korisnika:\n");
+			printf("Ime: ");
 			scanf("%s", imeKorisnika);
+			printf("Prezime: ");
 			scanf("%s", prezimeKorisnika);
-			printf("Unesite korisnicku grupu (analiticar/ administrator): \n");
-			scanf("%s", korisnickaGrupa);
+			do {
+				printf("Unesite korisnicku grupu:\n"
+					"1. analiticar\n"
+					"2. administrator\n");
+				if(scanf("%d", &temp) != 1)
+				{
+					printf("Pogresan unos.\n");
+					getchar();
+					getchar();
+					getchar();
+				}
+				if (temp == 1)
+					strcpy(korisnickaGrupa, "analiticar");
+				else if (temp == 2)
+					strcpy(korisnickaGrupa, "administrator");
+				/*else
+					printf("Pogresan unos, pokusajte ponovo.\n");*/
+			} while (temp != 1 && temp != 2); //TODO: ne radi za karaktere
+
 			if (file = fopen("Korisnici.txt", "a"))
 			{
 				if (!fputs(imeKorisnika, file))br++; fputc('\n', file);
@@ -39,7 +60,7 @@ int dodavanjeKorisnickogNaloga()
 			fclose(file);
 		}
 		else
-			printf("Uneseni podaci vec postoje!");
+			printf("Uneseni podaci vec postoje!"), getchar(), getchar();
 	free(korisnici);
 	if (br == 5)return 1; // Uspjesno uneseni podaci u datoteku o novom korisniku
 	else return 0;

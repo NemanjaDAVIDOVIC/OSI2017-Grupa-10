@@ -14,24 +14,15 @@ int moveFile(char* fileName,char* folder)
 			fprintf(fp, "%s", file);						//Upisuje originalni racun u novi folder
 			fclose(fp);
 			free(file);
-			if (!remove(fileName)) {
-				printf("Racun uspjesno obrisan.\n"); //Brise originalni racun
-				return 1;
-			}
-			printf("Racun nije bilo moguce obrisati.\n");
-			return -1;
+			if (!remove(fileName))//Brise originalni racun
+			 	return 1;//Racun uspjesno obrisan.
+			return -1;//Racun nije bilo moguce obrisati.
 		}
 		else
-		{
-			printf("Nije moguce prebaciti neodgovarajuci racun.\n");
-			return 0;
-		}
+			return 0;//Nije moguce prebaciti neodgovarajuci racun.
 	}
 	else
-	{
-		printf("Nije moguce procitati racun.\n");
-		return 2;
-	}
+		return 2;//Nije moguce procitati racun.
 }
 
 

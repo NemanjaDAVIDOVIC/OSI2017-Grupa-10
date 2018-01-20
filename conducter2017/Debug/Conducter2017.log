@@ -1,7 +1,0 @@
-﻿  Source.c
-c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\wingdi.h(118): warning C4005: 'ERROR': macro redefinition
-  c:\users\rb computer\desktop\conducter2017\conducter2017\racun2.h(8): note: see previous definition of 'ERROR'
-c:\users\rb computer\desktop\conducter2017\conducter2017\racun2.h(8): warning C4005: 'ERROR': macro redefinition
-  c:\program files (x86)\windows kits\10\include\10.0.16299.0\um\wingdi.h(118): note: see previous definition of 'ERROR'
-c:\users\rb computer\desktop\conducter2017\conducter2017\source.c(16): warning C4013: 'time' undefined; assuming extern returning int
-  Conducter2017.vcxproj -> C:\Users\RB Computer\Desktop\Conducter2017\Debug\Conducter2017.exe

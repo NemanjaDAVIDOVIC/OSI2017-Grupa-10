@@ -1,11 +1,10 @@
 #include "ProvjeraFormata5.h"
 
-int provjeraPetogFormata(char* name)
+int provjeraFormata5(char* fileName)
 {
 	FILE *fp;
 	char buffer[100];
-	getPath(buffer, name, "racuni/");
-	if (fp = fopen(buffer, "rb"))
+	if (fp = fopen(fileName, "rb"))
 	{
 		char original[30] = { "Sifra,Kolicina,Cijena,Ukupno\n" };
 		int sum1 = 0, sum2 = 0;
@@ -13,7 +12,6 @@ int provjeraPetogFormata(char* name)
 
 		if (strcmp(buffer, original)) {
 			fclose(fp);
-			printf("Format nije poznat.\n");
 			return 0; //Nije dobar format
 		}
 		else
@@ -21,21 +19,17 @@ int provjeraPetogFormata(char* name)
 				if (!checkLine(buffer, &sum1, &sum2))
 				{
 					fclose(fp);
-					printf("Format nije poznat.\n");
 					return 0; //Nije dobar format
 				}
 		if (sum1 != sum2)
 		{
 			fclose(fp);
-			printf("Sume nisu zadovoljavajuce.\n");
 			return 0; //Sume nisu zadovoljavajuce
 		}
 
 		fclose(fp);
-		printf("Odgovarajuci racun.\n");
 		return 1; //Sve je ok
 	}
-	printf("Nije moguce otvoriti racun imena %s.\n", name);
 	return 0;
 
 }

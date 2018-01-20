@@ -92,14 +92,14 @@ int ProvjeraFormata4(char* fileName)
 			brojac++;*/
 
 		fgets(str, 42, file);
+		fclose(file);
 		if (!strcmp(str, "======================================="))
             brojac++;
 
-		if (brojac == 16)
+		if (brojac == 15)
 			return 1;
 		else
 			return 0;
-		fclose(file);
 	}
 	else
         return 0;

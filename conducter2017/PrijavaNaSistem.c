@@ -57,7 +57,7 @@ int prijavaNaSistem(KORISNIK* arr, KORISNIK* ret)  //Pomocu 'KORISNIK* ret' se v
 	printf("\n\t   PIN: ");
 	scanf("%s", pin);
 	printf("---------------------------\n");
-	if (!provjeraPINa(pin))
+	if (!provjeraPINa(pin) && !provjeraKorisnika(arr->ime,arr->PIN, arr, ret))
 		return 0;
 
 	else if (!provjeraKorisnika(k_ime, pin, arr, ret))

@@ -16,7 +16,6 @@ char** scandirr()
 		closedir(dir);
 	}
 	else {
-		/* could not open directory */
 		printf("Nije moguce pronaci folder sa racunima.\n");
 		return NULL;
 	}

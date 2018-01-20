@@ -3,15 +3,28 @@
 
 int prikazPoMjesecu(PODACI* podaci,char* valuta,MJESEC* mjesec)
 {
-	printf("Unesite zeljenu opciju(0. Izlaz)\n");
-	for (int i = 0; i < brM; i++)
+	if (brM == 0)
 	{
-		printf("%d.  %d/%d\n", i + 1, mjesec[i].mjesec, mjesec[i].godina);
+		printf("Nema definisanih mjeseci u bazi podataka.\n");
+		getchar();
+		getchar();
+		return 0;
 	}
 	int odabir;
-	do
-	{
-		scanf("%d", &odabir);
+	do{
+		printf("Unesite zeljenu opciju (0 za Izlaz)\n");
+		for (int i = 0; i < brM; i++)
+		{
+			printf("%d.  %d/%d\n", i + 1, mjesec[i].mjesec, mjesec[i].godina);
+		}
+	
+		if(scanf("%d", &odabir)!= 1)
+		{
+			printf("Pogresan unos.\n");
+			getchar();
+			getchar();
+			getchar();
+		}
 		if (brM == 0)
 		{
 			return 0;
@@ -57,12 +70,25 @@ int prikazPoMjesecu(PODACI* podaci,char* valuta,MJESEC* mjesec)
 
 int prikazPoArtiklu(PODACI* podaci,char* valuta,PROIZVOD* proizvod)
 {
-	printf("Unesite zeljenu opciju(0. Izlaz)\n");
-	for (int i = 0; i < brP; i++)
-		printf("%d. %s\n", i + 1, proizvod[i].naziv);
+	if (brP == 0)
+	{
+		printf("Nema proizvoda u bazi podataka.\n");
+		getchar();
+		getchar();
+		return 0;
+	}
 	int artikal;
 	do {
-		scanf("%d", &artikal);
+		printf("Unesite zeljenu opciju (0 za Izlaz)\n");
+		for (int i = 0; i < brP; i++)
+		printf("%d. %s\n", i + 1, proizvod[i].naziv);
+		if(scanf("%d", &artikal)!= 1)
+		{
+			printf("Pogresan unos.\n");
+			getchar();
+			getchar();
+			getchar();
+		}
 		if (brP == 0)
 			return 0;
 	} while (artikal > brP || artikal < 0);
@@ -98,12 +124,25 @@ int prikazPoArtiklu(PODACI* podaci,char* valuta,PROIZVOD* proizvod)
 int prikazPoKupcu(PODACI* podaci,char* valuta,KUPAC* kupac)
 {
 	FILE* fp;
+	if (brK == 0)
+	{
+		printf("Nema kupaca u bazi podataka.\n");
+		getchar();
+		getchar();
+		return 0;
+	}
 	for (int i = 0; i < brK; i++)
 		printf("%d. %s\n", i + 1, kupac[i].ime);
 	int kupacc;
-	printf("Unesite zeljenu opciju(0. Izlaz)\n");
 	do {
-		scanf("%d", &kupacc);
+		printf("Unesite zeljenu opciju (0 za Izlaz)\n");
+		if(scanf("%d", &kupacc)!= 1)
+		{
+			printf("Pogresan unos.\n");
+			getchar();
+			getchar();
+			getchar();
+		}
 		if (brK == 0)
 			return 0;
 	} while (kupacc > brK || kupacc < 0);

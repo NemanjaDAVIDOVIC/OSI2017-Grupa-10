@@ -22,7 +22,7 @@ int brisanjeKorisnickogNaloga()
 		printf("%8s %16s %21s %19s", "IME", "PREZIME", "KORISNICKO IME", "KORISNICKA GRUPA\n");
 		printf("     =============================================================\n");
 		int k;
-		for (int i = 0; i < brojKorisnika; i++)
+		for (int i = 0; i < brojKorisnika, !strcmp(korisnici[i].korisnicka_grupa, "analiticar") || !strcmp(korisnici[i].korisnicka_grupa, "administrator"); i++)
 		{
 			printf("%3d. %-12s %-14s %-15s  %-15s\n", i + 1, korisnici[i].ime, korisnici[i].prezime, korisnici[i].korisnicko_ime, korisnici[i].korisnicka_grupa);
 			k = i;
@@ -32,7 +32,13 @@ int brisanjeKorisnickogNaloga()
 		printf("     =============================================================\n");
 		do
 		{
-			scanf("%d", &c);
+			if(scanf("%d", &c) != 1)
+			{
+				printf("Pogresan unos.\n");
+				getchar();
+				getchar();
+				getchar();
+			}
 			if (c == k)
 				return 0;
 		}while (c<1 || c>brojKorisnika);

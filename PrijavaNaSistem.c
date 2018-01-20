@@ -13,10 +13,9 @@ void citanjeIzDatoteke(KORISNIK** arr)
 	{
 		char line[21];
 		while (fgets(line, sizeof(line), file)) //Broji koliko ima linija u fajlu
-			brojKorisnika++; 
+			brojKorisnika++;
 
-		/* TESTER: Pozeljna bi bila provjera da li je baza podatak potpuna
-		(da li negdje fali neki podatak => da li je broj korisnika cijeli broj). */
+
 
 		brojKorisnika /= 5; //Broj linija u fajlu podijeljen sa 5 je broj korisnika
 		*arr = (KORISNIK*)malloc((brojKorisnika) * sizeof(KORISNIK));
@@ -36,7 +35,7 @@ void citanjeIzDatoteke(KORISNIK** arr)
 }
 
 
-int provjeraKorisnika(char* k_ime, char* pin, KORISNIK* arr, KORISNIK* ret)  
+int provjeraKorisnika(char* k_ime, char* pin, KORISNIK* arr, KORISNIK* ret)
 {
 	for (int i = 0; i < brojKorisnika; ++i)
 		if (!strcmp(arr[i].korisnicko_ime, k_ime) && !strcmp(arr[i].PIN, pin))
@@ -50,21 +49,20 @@ int provjeraKorisnika(char* k_ime, char* pin, KORISNIK* arr, KORISNIK* ret)
 
 int prijavaNaSistem(KORISNIK* arr, KORISNIK* ret)  //Pomocu 'KORISNIK* ret' se vraca ulogovani korisnik!
 {
+	printf("Unesite potrebne podatke: \n"
+		"---------------------------\n");
 	char k_ime[21], pin[10];
-	printf("\n	Unesite korisnicko ime: ");
+	printf("Korisnicko ime: ");
 	scanf("%s", k_ime);
-	printf("\n	Unesite PIN: ");
+	printf("\n\t   PIN: ");
 	scanf("%s", pin);
-	if (!provjeraPINa(pin))
-	{
-		printf("Nepravilno unesen PIN!");
+	printf("---------------------------\n");
+	if (!provjeraPINa(pin) && !provjeraKorisnika(arr->ime,arr->PIN, arr, ret))
 		return 0;
-	}
-	return provjeraKorisnika(k_ime, pin, arr, ret);
 
-	/* TESTER: Dobro rjesenje. 
-	Predlozio bih da se, ukoliko nema unesenog korisnickog imena u bazi podataka,
-	ne nudi opcija unosa PIN-a, vec da odmah izbacuje gresku. */
+	else if (!provjeraKorisnika(k_ime, pin, arr, ret))
+		return 0;
+	return 1;
 }
 
 

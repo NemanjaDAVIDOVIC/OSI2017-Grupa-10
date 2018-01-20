@@ -4,9 +4,11 @@
 #include <string.h>
 #define losi "neodgovarajuci/" //Folder u kojem se nalaze: neodgovarajuci racuni,
 #define racuni "racuni/"		//neobradjeni racuni
-#define MAX_SIZE 100
+#define obradjeni "obradjeni/"
+#define izvjestaji "izvjestaji/"
+#define MAX_SIZE 1000
 
-int moveBadFile(char* file_name);
+int moveFile(char* file_name,char*);
 void getPath(char* buffer,char* file_name,char* directory);
 
 

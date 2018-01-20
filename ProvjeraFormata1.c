@@ -6,7 +6,6 @@ int provjeraFormata1(char* fileName)
 {
 	FILE* file;
 	int br = 0, eof = -5;
-	/* TESTER: I ovdje kao i u prvojeti formata 3 bi bilo pozeljno da se datoteka navodi kao argument komandne linije. */
 	if (file = fopen(fileName, "r"))
 	{
 		char str[42];
@@ -18,13 +17,13 @@ int provjeraFormata1(char* fileName)
 		if (!strcmp(str, "Datum: "))
 			br++;
 		fgets(str, 32, file);
-		fgets(str, 2, file); // TESTER: Dovoljno je da kupi 2 jer ima smao novi red - \n
+		fgets(str, 2, file);
 		if (!strcmp(str, "\n"))
 			br++;
 		fgets(str, 40, file);
 		if (!strcmp(str, "\t       Racun\n"))
 			br++;
-		fgets(str, 2, file); // TESTER: I ovdje je dovoljno da kupi 2
+		fgets(str, 2, file); 
 		if (!strcmp(str, "\n"))
 			br++;
 		fgets(str, 40, file);

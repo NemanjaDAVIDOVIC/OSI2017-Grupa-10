@@ -40,7 +40,13 @@ int main()
 				do
 				{
 					adminMeni(&trenutniKorisnik);
-					scanf("%d", &odabir);
+					if (scanf("%d", &odabir) != 1)
+					{
+						printf("Pogresan unos.\n");
+						getchar();
+						getchar();
+						getchar();
+					}
 					if (odabir == 1)
 						valuta = ucitajValutu();
 					else if (odabir == 2) {
@@ -101,7 +107,13 @@ int main()
 					analitMeniHeder(&trenutniKorisnik);
 					analitMeni();
 					odabir = -1;
-					scanf("%d", &odabir);
+					if(scanf("%d", &odabir)!= 1)
+					{
+						printf("Pogresan unos.\n");
+						getchar();
+						getchar();
+						getchar();
+					}
 
 					if (odabir == 1)
 						prikazPoMjesecu(podaci, valuta, mjesec);
